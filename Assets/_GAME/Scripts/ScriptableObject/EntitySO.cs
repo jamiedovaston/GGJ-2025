@@ -24,7 +24,7 @@ public class EntitySO : ScriptableObject
     [SerializeField] private float _jumpForce;
     public float jumpForce { get { return _jumpForce; } }
 
-    private static EntitySO player = null;
+    public static EntitySO player = null;
 
     public static EntitySO GetPlayerEntityData()
     {

@@ -453,7 +453,7 @@ GameObject:
   - component: {fileID: 773623584}
   - component: {fileID: 773623585}
   m_Layer: 0
-  m_Name: InitialiseDomain
+  m_Name: Domain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -725,8 +725,8 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1442829647}
+  - {fileID: 691188242}
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 1489582447}
-  - {fileID: 691188242}

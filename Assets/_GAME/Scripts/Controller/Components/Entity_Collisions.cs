@@ -1,19 +1,33 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Entity_Collisions : MonoBehaviour
 {
-    public event Action<Collision> OnEnter;
-    public event Action OnExit;
+    public Action<Collision> OnEnter;
+    public Action OnExit;
+
+    private HashSet<Collider> activeCollisions = new HashSet<Collider>();
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision != null)
+        {
+            Debug.Log("Collision!");
+            activeCollisions.Add(collision.collider);
             OnEnter?.Invoke(collision);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
-        OnExit?.Invoke();
+        if (collision != null)
+        {
+            activeCollisions.Remove(collision.collider);
+            if (activeCollisions.Count == 0)
+            {
+                OnExit?.Invoke();
+            }
+        }
     }
 }

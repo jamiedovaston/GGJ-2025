@@ -13,8 +13,8 @@ public class Entity_Jump : MonoBehaviour
         m_Collisions = _collisions;
         rb = _rb;
 
-        _collisions.OnEnter += CollisionEnter;
-        _collisions.OnExit += CollisionExit;
+        m_Collisions.OnEnter += CollisionEnter;
+        m_Collisions.OnExit += CollisionExit;
     }
 
     private void CollisionExit()
@@ -26,7 +26,6 @@ public class Entity_Jump : MonoBehaviour
     {
         if (collision.contacts.Length > 0)
         {
-            // Ensure it's a ground contact
             float angle = Vector3.Angle(collision.contacts[0].normal, Vector3.up);
             if (angle < 45.0f)
             {
