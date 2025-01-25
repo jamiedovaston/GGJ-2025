@@ -2,36 +2,72 @@
 using UnityEngine;
 using System;
 using UnityEngine.Windows;
+using Unity.Cinemachine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EntityController : MonoBehaviour
 {
     private Rigidbody rb;
 
-    [SerializeField] private MovementSO m_MovementData;
+    private EntitySO m_Data;
 
     private Input_Movement m_Input;
+
     private Entity_Movement m_Movement;
+    private Entity_Camera m_Camera;
+    private Entity_Look m_Look;
+    private Entity_Jump m_Jump;
+    private Entity_Collisions m_Collisions;
 
-    private void Awake()
-    {
-        // temp
-        Init();
-    }
+    [SerializeField] private CinemachineCamera m_CinemachineVirtualCamera;
 
-    public void Init()
+    public void Init(EntitySO _data)
     {
         rb = GetComponent<Rigidbody>();
 
         m_Input = new Input_Movement();
 
+        m_Data = _data;
+
         m_Movement = gameObject.AddComponent<Entity_Movement>();
-        m_Movement.Init(m_MovementData, rb);
+        m_Look = gameObject.AddComponent<Entity_Look>();
+        m_Camera = gameObject.AddComponent<Entity_Camera>();
+        m_Jump = gameObject.AddComponent<Entity_Jump>();
+        m_Collisions = gameObject.AddComponent<Entity_Collisions>();
+
+        m_Movement.Init(m_Data, rb);
+        m_Camera.Init(m_Data, m_CinemachineVirtualCamera);
+        m_Look.Init(m_Data, m_Camera);
+        m_Jump.Init(m_Data, m_Collisions, rb);
 
         m_Input.Enable();
         m_Input.Player.Move.performed += Input_MovePerformed;
         m_Input.Player.Move.canceled += Input_MoveCanceled;
+        m_Input.Player.Look.performed += Input_LookPerformed;
+        m_Input.Player.Look.canceled += Input_LookPerformed;
+        m_Input.Player.Jump.performed += Input_JumpPerformed;
+        m_Input.Player.Jump.canceled += Input_JumpCanceled;
     }
+
+    public void OnDisable()
+    {
+        m_Input.Player.Move.performed -= Input_MovePerformed;
+        m_Input.Player.Move.canceled -= Input_MoveCanceled;
+        m_Input.Player.Look.performed -= Input_LookPerformed;
+        m_Input.Player.Look.performed -= Input_LookCanceled;
+    }
+
+    private void Input_LookPerformed(InputAction.CallbackContext context)
+    {
+        Vector2 axis = context.ReadValue<Vector2>();
+
+        if (m_Look != null && m_Look.isActiveAndEnabled)
+        {
+            m_Look.AdjustLook(axis);
+        }
+    }
+
+    private void Input_LookCanceled(InputAction.CallbackContext context) { }
 
     private void Input_MovePerformed(InputAction.CallbackContext context)
     {
@@ -52,4 +88,14 @@ public class EntityController : MonoBehaviour
             m_Movement.SetInMove(axis);
         }
     }
+
+    private void Input_JumpPerformed(InputAction.CallbackContext context)
+    {
+        if(m_Jump != null && m_Jump.isActiveAndEnabled)
+        {
+            m_Jump.Jump();
+        }
+    }
+
+    private void Input_JumpCanceled(InputAction.CallbackContext context) { }
 }
