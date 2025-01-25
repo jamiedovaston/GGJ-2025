@@ -14,14 +14,19 @@ public class MainMenu : MonoBehaviour
         canvases =  new Canvas[] { mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas };
 
         UpdateActiveCanvas(mainCanvas);
+
+        SoundManager.StartMusic(SoundType.MENUMUSIC);
     }
 
     #region Buttons
 
     public void PlayGame()
     {
-        SceneManager.LoadScene(1); // IMPLEMENT CORERCT SCENE
+        SoundManager.PlaySound(SoundType.CHANGEMAG);
 
+        SoundManager.StopMusic();
+
+        SceneManager.LoadScene(1); // IMPLEMENT CORRECT SCENE
     }
 
     public void OpenLevelSelect()
@@ -48,7 +53,9 @@ public class MainMenu : MonoBehaviour
 
     public void OpenExitMenu()
     {
-        exitCanvas.enabled = true;
+        SoundManager.PlaySound(SoundType.BUBBLEPOP);
+
+        exitCanvas.enabled = !exitCanvas.enabled;
     }
 
     public void ExitGame()
@@ -65,6 +72,8 @@ public class MainMenu : MonoBehaviour
 
     private void UpdateActiveCanvas(Canvas canvas)
     {
+        SoundManager.PlaySound(SoundType.BUBBLEPOP);
+
         activeCanvas = canvas;
 
         foreach (Canvas c in canvases)
