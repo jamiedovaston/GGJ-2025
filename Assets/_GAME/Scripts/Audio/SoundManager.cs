@@ -37,10 +37,7 @@ public class SoundManager : MonoBehaviour
         {
             Destroy(this);
         }
-    }
 
-    private void Start()
-    {
         AudioSource[] sources = GetComponents<AudioSource>();
         audioSource = sources[0];
         // ensure second source available
@@ -53,7 +50,15 @@ public class SoundManager : MonoBehaviour
             musicSource = sources[1];
         }
         musicSource.loop = true;
-        musicSource.clip = instance.soundList[(int)SoundType.MENUMUSIC].Sounds[0];
+        AudioClip[] musicClips = instance.soundList[(int)SoundType.MENUMUSIC].Sounds;
+        if (musicClips.Length < 0)
+        {
+            musicSource.clip = musicClips[UnityEngine.Random.Range(0,musicClips.Length)];
+        }
+    }
+
+    public void Start()
+    {
     }
 
 #if UNITY_EDITOR
@@ -74,7 +79,10 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundType sound, float volume = 1)
     {
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
-        instance.audioSource.PlayOneShot(clips[UnityEngine.Random.Range(0, clips.Length)], volume);
+        if (instance.audioSource != null)
+        {
+            instance.audioSource.PlayOneShot(clips[UnityEngine.Random.Range(0, clips.Length)], volume);
+        }
     }
     #endregion
 
