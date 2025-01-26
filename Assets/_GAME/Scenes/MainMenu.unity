@@ -1299,24 +1299,31 @@ MonoBehaviour:
     sounds: []
   - name: CHANGEMAG
     sounds:
+    - {fileID: 8300000, guid: ab772acdc1c8e224cbadd51397797914, type: 3}
     - {fileID: 8300000, guid: 36db4a253bd49994d94a539b9a098828, type: 3}
-    - {fileID: 8300000, guid: 8583f6570a83c5b48972495145a82443, type: 3}
   - name: PUMPGUN
     sounds:
     - {fileID: 8300000, guid: 6c5becabc242f464cace0f99f52c3741, type: 3}
+    - {fileID: 8300000, guid: 8ce2ef97691228142bfb3118a9986184, type: 3}
+    - {fileID: 8300000, guid: ce99afd54e5f7a549bdfd123621e38f0, type: 3}
+    - {fileID: 8300000, guid: b69b77924b24924419238c8e562af1d5, type: 3}
   - name: FOOTSTEP
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: e6818ad36b6b385429c7480746cd3822, type: 3}
   - name: JUMP
-    sounds: []
-  - name: LAND
-    sounds: []
-  - name: FROG
     sounds:
     - {fileID: 8300000, guid: 4aeabc2f68c7727478b93a4530b990b7, type: 3}
+  - name: LAND
+    sounds:
+    - {fileID: 8300000, guid: 1758d91cf0d026149b827ec3908ae5d4, type: 3}
+  - name: FROG
+    sounds: []
   - name: MENUMUSIC
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: ee4023bf7411968429e6751aba7563a5, type: 3}
   - name: LEVELMUSIC
-    sounds: []
+    sounds:
+    - {fileID: 8300000, guid: 03e9fef66f0b3fe47b3b89badf129488, type: 3}
 --- !u!4 &500660942
 Transform:
   m_ObjectHideFlags: 0
@@ -1344,7 +1351,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -1439,9 +1446,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 36db4a253bd49994d94a539b9a098828, type: 3}
-  m_Resource: {fileID: 8300000, guid: 36db4a253bd49994d94a539b9a098828, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1

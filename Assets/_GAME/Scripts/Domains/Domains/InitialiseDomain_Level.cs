@@ -21,6 +21,7 @@ public class InitialiseDomain_Level : InitialiseDomain
         _playerSpawner = GetComponent<IPlayerSpawnable>();
 
         Level_Start();
+        SoundManager.StartMusic(SoundType.LEVELMUSIC);
     }
 
     public void Level_Start()
