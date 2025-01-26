@@ -31,6 +31,9 @@ public class BubbleGunController : MonoBehaviour
         m_Input.Weapon.Fire.performed += Input_FirePerformed;
 
         m_Input.Weapon.BubbleStop.performed += Input_BubbleStopPerformed;
+
+        m_BubbleText.text = m_BubbleData[m_Index].Name;
+        m_AmmoText.text = $"Ammo: {m_Ammo}";
     }
 
     private void OnDisable()
@@ -53,8 +56,6 @@ public class BubbleGunController : MonoBehaviour
 
     public void Toggle()
     {
-        Debug.Log("Toggle!");
-
         if (m_Index + 1 >= m_BubbleData.Length) m_Index = 0;
         else m_Index++;
 

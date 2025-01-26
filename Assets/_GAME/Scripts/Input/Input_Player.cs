@@ -791,6 +791,15 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Exit"",
+                    ""type"": ""Button"",
+                    ""id"": ""ddbc366c-f85f-417c-8bad-043756ade0f0"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -802,6 +811,17 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Restart"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""176193c7-c058-4c70-92b1-8d34e73ad9b5"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Exit"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -899,6 +919,7 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
         // System
         m_System = asset.FindActionMap("System", throwIfNotFound: true);
         m_System_Restart = m_System.FindAction("Restart", throwIfNotFound: true);
+        m_System_Exit = m_System.FindAction("Exit", throwIfNotFound: true);
     }
 
     ~@Input_Player()
@@ -1235,11 +1256,13 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_System;
     private List<ISystemActions> m_SystemActionsCallbackInterfaces = new List<ISystemActions>();
     private readonly InputAction m_System_Restart;
+    private readonly InputAction m_System_Exit;
     public struct SystemActions
     {
         private @Input_Player m_Wrapper;
         public SystemActions(@Input_Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @Restart => m_Wrapper.m_System_Restart;
+        public InputAction @Exit => m_Wrapper.m_System_Exit;
         public InputActionMap Get() { return m_Wrapper.m_System; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1252,6 +1275,9 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @Exit.started += instance.OnExit;
+            @Exit.performed += instance.OnExit;
+            @Exit.canceled += instance.OnExit;
         }
 
         private void UnregisterCallbacks(ISystemActions instance)
@@ -1259,6 +1285,9 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @Exit.started -= instance.OnExit;
+            @Exit.performed -= instance.OnExit;
+            @Exit.canceled -= instance.OnExit;
         }
 
         public void RemoveCallbacks(ISystemActions instance)
@@ -1352,5 +1381,6 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
     public interface ISystemActions
     {
         void OnRestart(InputAction.CallbackContext context);
+        void OnExit(InputAction.CallbackContext context);
     }
 }

@@ -34,9 +34,11 @@ public class Entity_Movement : MonoBehaviour
 
     private IEnumerator C_Move()
     {
+        bool isGrounded;
         float time = 1.0f;
         while (time >= 0.0f)
         {
+            isGrounded = GetComponent<Entity_Jump>().IsGrounded;
             time -= Time.fixedDeltaTime;
 
             if (m_InMove != Vector2.zero)
@@ -48,7 +50,11 @@ public class Entity_Movement : MonoBehaviour
                 Vector3 currentVelocity = rb.linearVelocity;
                 Vector3 velocityChange = targetVelocity - new Vector3(currentVelocity.x, 0, currentVelocity.z);
 
-                rb.AddForce(velocityChange * data.acceleration, ForceMode.Acceleration);
+                rb.AddForce(velocityChange * data.acceleration * (isGrounded? 1 : data.airControl), ForceMode.Acceleration);
+                if (rb.linearVelocity.magnitude > 0.5f)
+                {
+                    //SoundManager.PlaySound(SoundType.FOOTSTEP); WILL START CONTINUOSLY
+                }
             }
             else
             {

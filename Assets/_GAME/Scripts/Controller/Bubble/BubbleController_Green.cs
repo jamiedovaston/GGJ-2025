@@ -10,16 +10,28 @@ public class BubbleController_Green : BubbleController
         BubbleGunController.OnBubbleStop += StopMovement;
     }
 
+    private void OnDisable()
+    {    
+        BubbleGunController.OnBubbleStop -= StopMovement;
+    }
+
     protected override void BubbleCollisionsEnter(Collision collision)
     {
-        StopMovement();
 
         if(collision.gameObject.CompareTag("Player"))
         {
             Rigidbody rb = collision.gameObject.GetComponent<Rigidbody>();
 
-            if(rb.linearVelocity.y <= 0.0f)
+            if (Vector3.Dot(collision.contacts[0].normal, Vector3.zero) <= 0.4)
+            {
                 rb.AddExplosionForce(m_ExplosionForce, transform.position, 3.0f, m_ExplosionForce);
+                //Debug.Log("bounce");
+            }
+        }
+        else
+        {
+            StopMovement();
+
         }
     }
 }

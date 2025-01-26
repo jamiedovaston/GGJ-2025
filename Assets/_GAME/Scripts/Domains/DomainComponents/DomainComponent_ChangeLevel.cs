@@ -1,10 +1,9 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public abstract class DomainComponent_ChangeLevel : MonoBehaviour
 {
-    public static Action<string> OnSceneLoad;
-
     private Tool_Collisions m_Collisions;
 
     private void OnEnable()
@@ -24,3 +23,4 @@ public abstract class DomainComponent_ChangeLevel : MonoBehaviour
 
     protected abstract void CollisionChangeLevel(Collision collision);
 }
+
