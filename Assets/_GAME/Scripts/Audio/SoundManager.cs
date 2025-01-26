@@ -52,6 +52,7 @@ public class SoundManager : MonoBehaviour
         {
             musicSource = sources[1];
         }
+
         musicSource.loop = true;
         musicSource.clip = instance.soundList[(int)SoundType.MENUMUSIC].Sounds[0];
     }

@@ -48,6 +48,9 @@ public class EntityController : MonoBehaviour
         m_Input.Player.Look.canceled += Input_LookPerformed;
 
         m_Input.Player.Jump.performed += Input_JumpPerformed;
+
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     public void OnDisable()
@@ -59,6 +62,9 @@ public class EntityController : MonoBehaviour
         m_Input.Player.Look.performed -= Input_LookCanceled;
 
         m_Input.Player.Jump.performed -= Input_JumpPerformed;
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
    
     private void Input_LookPerformed(InputAction.CallbackContext context)

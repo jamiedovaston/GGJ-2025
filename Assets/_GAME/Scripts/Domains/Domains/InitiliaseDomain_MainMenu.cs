@@ -3,15 +3,16 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+public class InitiliaseDomain_MainMenu : InitialiseDomain
 {
     [SerializeField] private Canvas mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas;
     private Canvas[] canvases;
     private Canvas activeCanvas;
 
-    public void Start()
+
+    public override void Initialise(SceneDataSO data)
     {
-        canvases =  new Canvas[] { mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas };
+        canvases = new Canvas[] { mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas };
 
         UpdateActiveCanvas(mainCanvas);
 
@@ -20,13 +21,13 @@ public class MainMenu : MonoBehaviour
 
     #region Buttons
 
-    public void PlayGame()
+    public async void PlayGame()
     {
         SoundManager.PlaySound(SoundType.CHANGEMAG);
 
         SoundManager.StopMusic();
 
-        SceneManager.LoadScene(1); // IMPLEMENT CORRECT SCENE
+        await SceneToolManager.ChangeScene("scene_level_one"); // IMPLEMENT CORRECT SCENE
     }
 
     public void OpenLevelSelect()

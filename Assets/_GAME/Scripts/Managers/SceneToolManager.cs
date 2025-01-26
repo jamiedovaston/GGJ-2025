@@ -6,7 +6,7 @@ public static class SceneToolManager
 {
     public static async Task ChangeScene(string _id)
     {
-        SceneDataSO scene = Resources.Load<SceneDataSO>($"Levels/{_id}");
+        SceneDataSO scene = Resources.Load<SceneDataSO>($"Scenes/{_id}");
 
         if (scene == null)
         {

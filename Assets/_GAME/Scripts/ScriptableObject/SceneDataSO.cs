@@ -25,4 +25,23 @@ public class SceneDataSO : JDDataAssets<SceneDataSO>
         Debug.LogError($"No scene found with build index : {index}");
         return null;
     }
+
+    public static SceneDataSO GetLevelByID(string _id)
+    {
+        if (data == null)
+        {
+            data = Resources.LoadAll<SceneDataSO>("Scenes");
+        }
+
+        for (int i = 0; i < data.Length; i++)
+        {
+            if (data[i].name == _id)
+            {
+                return data[i];
+            }
+        }
+
+        Debug.LogError($"No scene found with build index : {_id}");
+        return null;
+    }
 }

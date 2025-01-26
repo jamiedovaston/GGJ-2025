@@ -669,7 +669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1442829647}
   m_Layer: 0
-  m_Name: INIT=========================================
+  m_Name: INITIALISATION=========================================
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
