@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Entity_Collisions : MonoBehaviour
+public class Tool_Collisions : MonoBehaviour
 {
     public Action<Collision> OnEnter;
     public Action OnExit;

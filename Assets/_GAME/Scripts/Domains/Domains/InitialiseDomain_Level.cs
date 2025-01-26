@@ -35,16 +35,19 @@ public class InitialiseDomain_Level : InitialiseDomain
 
     private void Update()
     {
-        if(m_Input.System.Restart.IsPressed())
+        if(m_Input != null)
         {
-            m_RestartTimer -= Time.deltaTime;
-
-            //update restart UI
-
-            if (m_RestartTimer <= 0.0f && !m_Restarting)
+            if(m_Input.System.Restart.IsPressed())
             {
-                m_Restarting = true;
-                Level_Restart();
+                m_RestartTimer -= Time.deltaTime;
+
+                //update restart UI
+
+                if (m_RestartTimer <= 0.0f && !m_Restarting)
+                {
+                    m_Restarting = true;
+                    Level_Restart();
+                }
             }
         }
     }

@@ -3,11 +3,11 @@
 public class Entity_Jump : MonoBehaviour
 {
     private EntitySO m_Data;
-    private Entity_Collisions m_Collisions;
+    private Tool_Collisions m_Collisions;
     private Rigidbody rb;
     private bool isGrounded;
 
-    public void Init(EntitySO _data, Entity_Collisions _collisions, Rigidbody _rb)
+    public void Init(EntitySO _data, Tool_Collisions _collisions, Rigidbody _rb)
     {
         m_Data = _data;
         m_Collisions = _collisions;
