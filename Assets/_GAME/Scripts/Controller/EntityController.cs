@@ -17,7 +17,7 @@ public class EntityController : MonoBehaviour
     private Entity_Camera m_Camera;
     private Entity_Look m_Look;
     private Entity_Jump m_Jump;
-    private Entity_Collisions m_Collisions;
+    private Tool_Collisions m_Collisions;
 
     [SerializeField] private CinemachineCamera m_CinemachineVirtualCamera;
 
@@ -33,7 +33,7 @@ public class EntityController : MonoBehaviour
         m_Look = gameObject.AddComponent<Entity_Look>();
         m_Camera = gameObject.AddComponent<Entity_Camera>();
         m_Jump = gameObject.AddComponent<Entity_Jump>();
-        m_Collisions = gameObject.AddComponent<Entity_Collisions>();
+        m_Collisions = gameObject.AddComponent<Tool_Collisions>();
         
         m_Movement.Init(m_Data, m_RB);
         m_Camera.Init(m_Data, m_CinemachineVirtualCamera);
