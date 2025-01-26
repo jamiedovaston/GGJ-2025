@@ -8,6 +8,11 @@ public class BubbleController_Blue : BubbleController
         BubbleGunController.OnBubbleStop += StopMovement;
     }
 
+    private void OnDisable()
+    {
+        BubbleGunController.OnBubbleStop -= StopMovement;
+    }
+
     protected override void BubbleCollisionsEnter(Collision collision)
     {
         StopMovement();
