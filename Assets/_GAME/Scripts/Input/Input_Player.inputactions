@@ -710,6 +710,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "BubbleStop",
+                    "type": "Button",
+                    "id": "2c903ed7-4aa2-4428-a301-8b9f00050bf3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -719,7 +728,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard&Mouse",
                     "action": "Fire",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -727,11 +736,50 @@
                 {
                     "name": "",
                     "id": "13a793d4-508f-4062-a608-12c6748b2e7e",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Toggle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d472af94-24e6-47d6-be8a-fb7d4920e3c7",
                     "path": "<Mouse>/rightButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
-                    "action": "Toggle",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "BubbleStop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "System",
+            "id": "71cbfa56-75e3-4ef2-b4ca-08369f0ee2ec",
+            "actions": [
+                {
+                    "name": "Restart",
+                    "type": "Button",
+                    "id": "269ceaee-8259-4962-9909-7db939130366",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0f0bd942-9e02-4cf7-9169-4e6aa7fc357c",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Restart",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

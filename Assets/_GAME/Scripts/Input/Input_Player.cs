@@ -732,6 +732,15 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BubbleStop"",
+                    ""type"": ""Button"",
+                    ""id"": ""2c903ed7-4aa2-4428-a301-8b9f00050bf3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -741,7 +750,7 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": "";Keyboard&Mouse"",
                     ""action"": ""Fire"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -749,11 +758,50 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""13a793d4-508f-4062-a608-12c6748b2e7e"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Toggle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d472af94-24e6-47d6-be8a-fb7d4920e3c7"",
                     ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Toggle"",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""BubbleStop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""System"",
+            ""id"": ""71cbfa56-75e3-4ef2-b4ca-08369f0ee2ec"",
+            ""actions"": [
+                {
+                    ""name"": ""Restart"",
+                    ""type"": ""Button"",
+                    ""id"": ""269ceaee-8259-4962-9909-7db939130366"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""0f0bd942-9e02-4cf7-9169-4e6aa7fc357c"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -847,6 +895,10 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
         m_Weapon = asset.FindActionMap("Weapon", throwIfNotFound: true);
         m_Weapon_Fire = m_Weapon.FindAction("Fire", throwIfNotFound: true);
         m_Weapon_Toggle = m_Weapon.FindAction("Toggle", throwIfNotFound: true);
+        m_Weapon_BubbleStop = m_Weapon.FindAction("BubbleStop", throwIfNotFound: true);
+        // System
+        m_System = asset.FindActionMap("System", throwIfNotFound: true);
+        m_System_Restart = m_System.FindAction("Restart", throwIfNotFound: true);
     }
 
     ~@Input_Player()
@@ -854,6 +906,7 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, Input_Player.Player.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, Input_Player.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Weapon.enabled, "This will cause a leak and performance issues, Input_Player.Weapon.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_System.enabled, "This will cause a leak and performance issues, Input_Player.System.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -1121,12 +1174,14 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
     private List<IWeaponActions> m_WeaponActionsCallbackInterfaces = new List<IWeaponActions>();
     private readonly InputAction m_Weapon_Fire;
     private readonly InputAction m_Weapon_Toggle;
+    private readonly InputAction m_Weapon_BubbleStop;
     public struct WeaponActions
     {
         private @Input_Player m_Wrapper;
         public WeaponActions(@Input_Player wrapper) { m_Wrapper = wrapper; }
         public InputAction @Fire => m_Wrapper.m_Weapon_Fire;
         public InputAction @Toggle => m_Wrapper.m_Weapon_Toggle;
+        public InputAction @BubbleStop => m_Wrapper.m_Weapon_BubbleStop;
         public InputActionMap Get() { return m_Wrapper.m_Weapon; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1142,6 +1197,9 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
             @Toggle.started += instance.OnToggle;
             @Toggle.performed += instance.OnToggle;
             @Toggle.canceled += instance.OnToggle;
+            @BubbleStop.started += instance.OnBubbleStop;
+            @BubbleStop.performed += instance.OnBubbleStop;
+            @BubbleStop.canceled += instance.OnBubbleStop;
         }
 
         private void UnregisterCallbacks(IWeaponActions instance)
@@ -1152,6 +1210,9 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
             @Toggle.started -= instance.OnToggle;
             @Toggle.performed -= instance.OnToggle;
             @Toggle.canceled -= instance.OnToggle;
+            @BubbleStop.started -= instance.OnBubbleStop;
+            @BubbleStop.performed -= instance.OnBubbleStop;
+            @BubbleStop.canceled -= instance.OnBubbleStop;
         }
 
         public void RemoveCallbacks(IWeaponActions instance)
@@ -1169,6 +1230,52 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
         }
     }
     public WeaponActions @Weapon => new WeaponActions(this);
+
+    // System
+    private readonly InputActionMap m_System;
+    private List<ISystemActions> m_SystemActionsCallbackInterfaces = new List<ISystemActions>();
+    private readonly InputAction m_System_Restart;
+    public struct SystemActions
+    {
+        private @Input_Player m_Wrapper;
+        public SystemActions(@Input_Player wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Restart => m_Wrapper.m_System_Restart;
+        public InputActionMap Get() { return m_Wrapper.m_System; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(SystemActions set) { return set.Get(); }
+        public void AddCallbacks(ISystemActions instance)
+        {
+            if (instance == null || m_Wrapper.m_SystemActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_SystemActionsCallbackInterfaces.Add(instance);
+            @Restart.started += instance.OnRestart;
+            @Restart.performed += instance.OnRestart;
+            @Restart.canceled += instance.OnRestart;
+        }
+
+        private void UnregisterCallbacks(ISystemActions instance)
+        {
+            @Restart.started -= instance.OnRestart;
+            @Restart.performed -= instance.OnRestart;
+            @Restart.canceled -= instance.OnRestart;
+        }
+
+        public void RemoveCallbacks(ISystemActions instance)
+        {
+            if (m_Wrapper.m_SystemActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ISystemActions instance)
+        {
+            foreach (var item in m_Wrapper.m_SystemActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_SystemActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public SystemActions @System => new SystemActions(this);
     private int m_KeyboardMouseSchemeIndex = -1;
     public InputControlScheme KeyboardMouseScheme
     {
@@ -1240,5 +1347,10 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
     {
         void OnFire(InputAction.CallbackContext context);
         void OnToggle(InputAction.CallbackContext context);
+        void OnBubbleStop(InputAction.CallbackContext context);
+    }
+    public interface ISystemActions
+    {
+        void OnRestart(InputAction.CallbackContext context);
     }
 }

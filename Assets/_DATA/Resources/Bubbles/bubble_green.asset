@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37ffb755609d3314da1c3c87e3910e98, type: 3}
-  m_Name: bubble_red
+  m_Name: bubble_green
   m_EditorClassIdentifier: 
-  _name: Red
-  _prefab: {fileID: 3150208291625283915, guid: bb0053b5cd0b51f458b33d39e97e2243, type: 3}
-  _color: {r: 1, g: 0.37346184, b: 0.2980392, a: 1}
+  _name: Green
+  _prefab: {fileID: 3150208291625283915, guid: 14ebc510ed2996c4892cb3e86845dd59, type: 3}
+  _color: {r: 0.31517726, g: 1, b: 0.2980392, a: 1}

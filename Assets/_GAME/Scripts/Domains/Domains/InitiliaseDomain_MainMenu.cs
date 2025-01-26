@@ -9,7 +9,6 @@ public class InitiliaseDomain_MainMenu : InitialiseDomain
     private Canvas[] canvases;
     private Canvas activeCanvas;
 
-
     public override void Initialise(SceneDataSO data)
     {
         canvases = new Canvas[] { mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas };

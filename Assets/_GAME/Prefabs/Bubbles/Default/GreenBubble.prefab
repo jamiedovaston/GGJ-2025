@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3162120970682312360}
   - component: {fileID: 1361035469800428099}
   - component: {fileID: 2594514608967227047}
-  - component: {fileID: -7933779346211557481}
+  - component: {fileID: 8007422538185920187}
   - component: {fileID: 8644618714347919016}
   m_Layer: 0
-  m_Name: RedBubble
+  m_Name: GreenBubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3150208291625283915}
-  m_Material: {fileID: 13400000, guid: c36fbb9389fca164cbb770c27cbdccc2, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -84,7 +84,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-7933779346211557481
+--- !u!114 &8007422538185920187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,9 +93,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3150208291625283915}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e67415eb3a174624fa0210767e226294, type: 3}
+  m_Script: {fileID: 11500000, guid: 684b0ecbd0271ec4fbfb4de73844a994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_ExplosionForce: 1250
 --- !u!95 &8644618714347919016
 Animator:
   serializedVersion: 7
@@ -214,7 +215,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 792c89c47507d704c946a51a77ac077d, type: 2}
+  - {fileID: 2100000, guid: 7d1ee93baa8ea0c4db52c5d4502c65e2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
