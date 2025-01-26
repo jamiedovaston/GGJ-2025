@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57dca9ea83dc8c644a2e31aed0345695, type: 3}
   m_Name: scene_level_two
   m_EditorClassIdentifier: 
-  _buildIndex: 2
+  _buildIndex: 4
   _levelName: New Beginnings
-  _bubbleCount: 5
+  _bubbleCount: 6
