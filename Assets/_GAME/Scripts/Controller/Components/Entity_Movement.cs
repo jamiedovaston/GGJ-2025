@@ -51,6 +51,10 @@ public class Entity_Movement : MonoBehaviour
                 Vector3 velocityChange = targetVelocity - new Vector3(currentVelocity.x, 0, currentVelocity.z);
 
                 rb.AddForce(velocityChange * data.acceleration * (isGrounded? 1 : data.airControl), ForceMode.Acceleration);
+                if (rb.linearVelocity.magnitude > 0.5f)
+                {
+                    //SoundManager.PlaySound(SoundType.FOOTSTEP); WILL START CONTINUOSLY
+                }
             }
             else
             {

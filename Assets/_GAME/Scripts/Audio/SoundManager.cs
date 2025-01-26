@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 using Unity.VisualScripting;
+using System.Net.NetworkInformation;
 
 public enum SoundType
 {
@@ -18,7 +19,7 @@ public enum SoundType
     LEVELMUSIC
 }
 
-[RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
@@ -31,6 +32,7 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
+            DontDestroyOnLoad(gameObject);
             instance = this;
         }
         else
@@ -53,27 +55,11 @@ public class SoundManager : MonoBehaviour
 
         musicSource.loop = true;
         AudioClip[] musicClips = instance.soundList[(int)SoundType.MENUMUSIC].Sounds;
-        if (musicClips.Length < 0)
+        if (musicClips.Length > 0)
         {
             musicSource.clip = musicClips[UnityEngine.Random.Range(0,musicClips.Length)];
         }
     }
-
-    public void Start()
-    {
-    }
-
-#if UNITY_EDITOR
-    private void OnEnable()
-    {
-        string[] names = Enum.GetNames(typeof(SoundType));
-        Array.Resize(ref soundList, names.Length);
-        for (int i = 0; i < soundList.Length; i++)
-        {
-            soundList[i].name = names[i];
-        }
-    }
-#endif
 
     #endregion
 
@@ -91,6 +77,11 @@ public class SoundManager : MonoBehaviour
     #region music
     public static void StartMusic(SoundType sound, float volume = 1)
     {
+        AudioClip[] musicClips = instance.soundList[(int)sound].Sounds;
+        if (musicClips.Length > 0)
+        {
+            instance.musicSource.clip = musicClips[UnityEngine.Random.Range(0, musicClips.Length)];
+        }
         instance.musicSource.Play();
     }
 
