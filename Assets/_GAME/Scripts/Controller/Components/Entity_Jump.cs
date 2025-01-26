@@ -41,7 +41,7 @@ public class Entity_Jump : MonoBehaviour
         {
             rb.AddForce(Vector3.up * m_Data.jumpForce, ForceMode.Impulse);
             isGrounded = false;
-            SoundManager.PlaySound(SoundType.JUMP);
+            SoundManager.PlaySound(SoundType.FROG);
         }
     }
 }
