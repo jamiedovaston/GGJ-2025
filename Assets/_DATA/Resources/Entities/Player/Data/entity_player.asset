@@ -19,4 +19,4 @@ MonoBehaviour:
   _xSensitivity: 0.5
   _xMin: -90
   _xMax: 90
-  _jumpForce: 10
+  _jumpForce: 14

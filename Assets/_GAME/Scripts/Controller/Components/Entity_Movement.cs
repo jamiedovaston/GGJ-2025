@@ -39,7 +39,6 @@ public class Entity_Movement : MonoBehaviour
         while (time >= 0.0f)
         {
             isGrounded = GetComponent<Entity_Jump>().IsGrounded;
-            Debug.Log(isGrounded);
             time -= Time.fixedDeltaTime;
 
             if (m_InMove != Vector2.zero)
