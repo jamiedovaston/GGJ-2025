@@ -5,13 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class InitiliaseDomain_MainMenu : InitialiseDomain
 {
-    [SerializeField] private Canvas mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas;
+    [SerializeField] private Canvas mainCanvas, levelSelectCanvas, exitCanvas;
     private Canvas[] canvases;
     private Canvas activeCanvas;
 
     public override void Initialise(SceneDataSO data)
     {
-        canvases = new Canvas[] { mainCanvas, levelSelectCanvas, settingsCanvas, exitCanvas };
+        canvases = new Canvas[] { mainCanvas, levelSelectCanvas, exitCanvas };
 
         UpdateActiveCanvas(mainCanvas);
 
@@ -37,11 +37,6 @@ public class InitiliaseDomain_MainMenu : InitialiseDomain
     public async void LoadScene(string _id)
     {
         await SceneToolManager.ChangeScene(_id);
-    }
-
-    public void OpenSettings()
-    {
-        UpdateActiveCanvas(settingsCanvas);
     }
 
     public void OpenExitMenu()

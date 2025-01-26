@@ -10,6 +10,8 @@ public class EntityController : MonoBehaviour
 {
     private Rigidbody m_RB;
 
+    [SerializeField] private Animator m_Animator;
+
     private EntitySO m_Data;
 
     private Input_Player m_Input;
@@ -86,6 +88,7 @@ public class EntityController : MonoBehaviour
 
         if(m_Movement != null && m_Movement.isActiveAndEnabled)
         {
+            m_Animator.SetBool("walking", true);
             m_Movement.SetInMove(axis);
         }
     }
@@ -96,6 +99,7 @@ public class EntityController : MonoBehaviour
 
         if (m_Movement != null && m_Movement.isActiveAndEnabled)
         {
+            m_Animator.SetBool("walking", false);
             m_Movement.SetInMove(axis);
         }
     }

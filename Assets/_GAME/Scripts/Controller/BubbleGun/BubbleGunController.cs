@@ -7,6 +7,8 @@ public class BubbleGunController : MonoBehaviour
 {
     public static Action OnBubbleStop;
 
+    [SerializeField] private Animator m_Animator;
+
     Input_Player m_Input;
     BubbleDataSO[] m_BubbleData;
     [SerializeField] private Transform m_Barrel;
@@ -59,6 +61,7 @@ public class BubbleGunController : MonoBehaviour
         if (m_Index + 1 >= m_BubbleData.Length) m_Index = 0;
         else m_Index++;
 
+        m_Animator.SetTrigger("switching");
         //update gun, animate, etc.
         m_BubbleText.text = m_BubbleData[m_Index].Name;
     }
@@ -72,6 +75,7 @@ public class BubbleGunController : MonoBehaviour
             BubbleController bubble = Instantiate(m_BubbleData[m_Index].Prefab, m_Barrel.position, m_Barrel.rotation).GetComponent<BubbleController>();
             bubble.Initialise();
             bubble.GetComponent<Rigidbody>().AddForce(m_Barrel.forward * 5.0f, ForceMode.Impulse);
+            m_Animator.SetTrigger("shooting");
             m_AmmoText.text = $"Ammo: {m_Ammo}";
         }
     }
