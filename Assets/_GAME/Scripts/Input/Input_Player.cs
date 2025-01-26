@@ -749,7 +749,7 @@ public partial class @Input_Player: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""13a793d4-508f-4062-a608-12c6748b2e7e"",
-                    ""path"": """",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

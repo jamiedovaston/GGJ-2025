@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class BubbleGunController : MonoBehaviour, IBubbleable
 {
@@ -9,6 +10,8 @@ public class BubbleGunController : MonoBehaviour, IBubbleable
     BubbleDataSO[] m_BubbleData;
 
     [SerializeField] private Transform m_Barrel;
+
+    [SerializeField] private TMP_Text m_BubbleText;
 
     private int m_Index;
 
@@ -36,10 +39,13 @@ public class BubbleGunController : MonoBehaviour, IBubbleable
 
     public void Toggle()
     {
+        Debug.Log("Toggle!");
+
         if (m_Index + 1 >= m_BubbleData.Length) m_Index = 0;
         else m_Index++;
 
         //update gun, animate, etc.
+        m_BubbleText.text = m_BubbleData[m_Index].Name;
     }
 
     public void Fire()
