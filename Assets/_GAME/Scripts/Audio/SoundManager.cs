@@ -40,6 +40,7 @@ public class SoundManager : MonoBehaviour
 
         AudioSource[] sources = GetComponents<AudioSource>();
         audioSource = sources[0];
+        audioSource.loop = false;
         // ensure second source available
         if (sources.Length < 2)
         {

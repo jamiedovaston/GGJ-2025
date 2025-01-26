@@ -9,6 +9,9 @@ public class EntitySO : ScriptableObject
     [SerializeField] private float _speed;
     public float speed { get { return _speed; } }
 
+    [SerializeField] private float _airControl;
+    public float airControl { get { return _airControl; } }
+
     [SerializeField] private float _ySensitivity;
     public float ySensitivity { get { return _ySensitivity; } }
 

@@ -5,6 +5,7 @@ public class Entity_Jump : MonoBehaviour
     private EntitySO m_Data;
     private Tool_Collisions m_Collisions;
     private Rigidbody rb;
+    public bool IsGrounded { get => isGrounded; }
     private bool isGrounded;
 
     public void Init(EntitySO _data, Tool_Collisions _collisions, Rigidbody _rb)

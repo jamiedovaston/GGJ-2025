@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _acceleration: 8
   _speed: 10
-  _ySensitivity: 1
-  _xSensitivity: 1
+  _airControl: 0.4
+  _ySensitivity: 0.5
+  _xSensitivity: 0.5
   _xMin: -90
   _xMax: 90
-  _jumpForce: 20
+  _jumpForce: 10
