@@ -34,16 +34,9 @@ public class InitiliaseDomain_MainMenu : InitialiseDomain
         UpdateActiveCanvas(levelSelectCanvas);
     }
     
-    public void LoadScene(int sceneNum)
+    public async void LoadScene(string _id)
     {
-        if (sceneNum <= SceneManager.sceneCountInBuildSettings - 1)
-        {
-            SceneManager.LoadScene(sceneNum);
-        }
-        else
-        {
-            Debug.LogWarning("Scene " +  sceneNum + " not found.");
-        }
+        await SceneToolManager.ChangeScene(_id);
     }
 
     public void OpenSettings()

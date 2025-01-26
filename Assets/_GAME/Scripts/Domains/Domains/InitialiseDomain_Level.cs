@@ -21,6 +21,7 @@ public class InitialiseDomain_Level : InitialiseDomain
         _playerSpawner = GetComponent<IPlayerSpawnable>();
 
         Level_Start();
+        SoundManager.StartMusic(SoundType.LEVELMUSIC);
     }
 
     public void Level_Start()
@@ -31,6 +32,7 @@ public class InitialiseDomain_Level : InitialiseDomain
         player.Initialise(EntitySO.GetPlayerEntityData(), m_Input, m_Data.bubbleCount);
 
         m_Input.System.Restart.canceled += Input_CancelRestart;
+        m_Input.System.Exit.performed += Input_CancelExit;
     }
 
     private void Update()
@@ -53,10 +55,12 @@ public class InitialiseDomain_Level : InitialiseDomain
     }
 
     private void Input_CancelRestart(InputAction.CallbackContext context) => m_RestartTimer = RESTART_TIME;
+    private async void Input_CancelExit(InputAction.CallbackContext context) => await SceneToolManager.ChangeScene("scene_main_menu");
 
     public async void Level_Restart()
     {
         m_Input.System.Restart.canceled -= Input_CancelRestart;
+        m_Input.System.Exit.performed -= Input_CancelExit;
         await SceneToolManager.ChangeScene(m_Data.name);
     }
 }

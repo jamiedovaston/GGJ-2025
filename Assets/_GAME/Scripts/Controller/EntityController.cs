@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.Windows;
 using Unity.Cinemachine;
+using UnityEditor.Animations;
 
 [RequireComponent(typeof(Rigidbody))]
 public class EntityController : MonoBehaviour

@@ -2,6 +2,7 @@ using UnityEngine;
 using System;
 using UnityEditor;
 using Unity.VisualScripting;
+using System.Net.NetworkInformation;
 
 public enum SoundType
 {
@@ -18,7 +19,7 @@ public enum SoundType
     LEVELMUSIC
 }
 
-[RequireComponent(typeof(AudioSource)), ExecuteInEditMode]
+[RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour
 {
     [SerializeField] private SoundList[] soundList;
@@ -31,18 +32,17 @@ public class SoundManager : MonoBehaviour
     {
         if (instance == null)
         {
+            DontDestroyOnLoad(gameObject);
             instance = this;
         }
         else
         {
             Destroy(this);
         }
-    }
 
-    private void Start()
-    {
         AudioSource[] sources = GetComponents<AudioSource>();
         audioSource = sources[0];
+        audioSource.loop = false;
         // ensure second source available
         if (sources.Length < 2)
         {
@@ -54,20 +54,12 @@ public class SoundManager : MonoBehaviour
         }
 
         musicSource.loop = true;
-        musicSource.clip = instance.soundList[(int)SoundType.MENUMUSIC].Sounds[0];
-    }
-
-#if UNITY_EDITOR
-    private void OnEnable()
-    {
-        string[] names = Enum.GetNames(typeof(SoundType));
-        Array.Resize(ref soundList, names.Length);
-        for (int i = 0; i < soundList.Length; i++)
+        AudioClip[] musicClips = instance.soundList[(int)SoundType.MENUMUSIC].Sounds;
+        if (musicClips.Length > 0)
         {
-            soundList[i].name = names[i];
+            musicSource.clip = musicClips[UnityEngine.Random.Range(0,musicClips.Length)];
         }
     }
-#endif
 
     #endregion
 
@@ -75,13 +67,21 @@ public class SoundManager : MonoBehaviour
     public static void PlaySound(SoundType sound, float volume = 1)
     {
         AudioClip[] clips = instance.soundList[(int)sound].Sounds;
-        instance.audioSource.PlayOneShot(clips[UnityEngine.Random.Range(0, clips.Length)], volume);
+        if (instance.audioSource != null)
+        {
+            instance.audioSource.PlayOneShot(clips[UnityEngine.Random.Range(0, clips.Length)], volume);
+        }
     }
     #endregion
 
     #region music
     public static void StartMusic(SoundType sound, float volume = 1)
     {
+        AudioClip[] musicClips = instance.soundList[(int)sound].Sounds;
+        if (musicClips.Length > 0)
+        {
+            instance.musicSource.clip = musicClips[UnityEngine.Random.Range(0, musicClips.Length)];
+        }
         instance.musicSource.Play();
     }
 
