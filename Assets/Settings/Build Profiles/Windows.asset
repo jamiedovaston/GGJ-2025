@@ -19,11 +19,7 @@ MonoBehaviour:
     rid: 8917979944512913672
   m_Scenes:
   - m_enabled: 1
-    m_path: Assets/_GAME/Scenes/Main.unity
-  - m_enabled: 1
     m_path: Assets/_GAME/Scenes/MainMenu.unity
-  - m_enabled: 1
-    m_path: Assets/_GAME/Scenes/Level_Template.unity
   - m_enabled: 1
     m_path: Assets/_GAME/Scenes/Level1.unity
   - m_enabled: 1
